@@ -3,7 +3,7 @@ import { simpleError } from "../errors/simpleError";
 import { NewsService } from "../services/NewsService";
 
 export class NewsController {
-    newsService: NewsService;
+    private newsService: NewsService;
 
     constructor() {
         this.newsService = new NewsService();

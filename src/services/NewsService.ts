@@ -4,16 +4,16 @@ import { News } from "../models/News";
 import { NewsContent } from "../models/NewsContent";
 
 export class NewsService {
-    BASE_URL = "https://cedro.ce.gov.br/informa.php?";
+    private BASE_URL = "https://cedro.ce.gov.br/informa.php?";
 
     async getNews(page: number): Promise<News[] | Error> {
         try {
             const selector = await this.getCheerioSelector(`pagina=${page}`);
             const news: News[] = [];
             selector(".col-md-3.noticia1").each((index, element) => {
-                const idString = selector(element).find("a").attr("href")?.replace("informa.php?id=", "");
-                const id = idString ? Number(idString) : -1;
-                const title = selector(element).find(".p_noticia1").text();
+                const idFound = selector(element).find("a").attr("href")?.replace("informa.php?id=", "");
+                const id = idFound ? Number(idFound) : -1;
+                const title = selector(element).find(".p_noticia1").text().trim();
                 const category = selector(element).find("span[style]").text().trim();
                 const date = selector(element).find("strong[style]").text().trim();
                 const elapsedTime = selector(element).find("p[style]").last().text();
