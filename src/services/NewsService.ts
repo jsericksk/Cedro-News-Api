@@ -70,15 +70,14 @@ export class NewsService {
     }
 
     private fixImageUrl(imageUrl: string | undefined): string {
-        let fixedImageUrl = "";
         if (imageUrl !== undefined) {
             if (!imageUrl?.startsWith("https://")) {
-                fixedImageUrl = "https://cedro.ce.gov.br/" + imageUrl;
-            } else {
-                fixedImageUrl = imageUrl;
+                const fixedImageUrl = "https://cedro.ce.gov.br/" + imageUrl;
+                return fixedImageUrl;
             }
+            return imageUrl;
         }
-        return fixedImageUrl;
+        return "";
     }
 
     async getTotalPages(): Promise<number> {
