@@ -14,6 +14,8 @@ export class NewsService {
                 const idFound = selector(element).find("a").attr("href")?.replace("informa.php?id=", "");
                 const id = idFound ? Number(idFound) : -1;
                 const title = selector(element).find(".p_noticia1").text().trim();
+                let imageUrl = selector(element).find("img").attr("src") as string;
+                imageUrl = this.fixImageUrl(imageUrl);
                 const category = selector(element).find("span[style]").text().trim();
                 const date = selector(element).find("strong[style]").text().trim();
                 const elapsedTime = selector(element).find("p[style]").last().text();
@@ -21,6 +23,7 @@ export class NewsService {
                 const newsItem: News = {
                     id: id,
                     title: title,
+                    imagerUrl: imageUrl,
                     category: category,
                     date: date,
                     elapsedTime: elapsedTime
@@ -39,13 +42,7 @@ export class NewsService {
             const title = selector("strong[data-pesquisa]").text();
             const subtitle = selector(".p-abre").text();
             let imageUrl = selector(".imginfo").attr("src");
-            if (imageUrl !== undefined) {
-                if (!imageUrl?.startsWith("https://")) {
-                    imageUrl = this.BASE_URL + imageUrl;
-                }
-            } else {
-                imageUrl = "";
-            }
+            imageUrl = this.fixImageUrl(imageUrl);
             const content = selector(".p-info").text();
             let date = selector("span[style=\"font-size: 12px; color:#303030;\"]").text().trim();
             const match = date.match(/\d+/);
@@ -70,6 +67,18 @@ export class NewsService {
         } catch (error) {
             return new Error("Erro ao obter os dados da notícia");
         }
+    }
+
+    private fixImageUrl(imageUrl: string | undefined): string {
+        let fixedImageUrl = "";
+        if (imageUrl !== undefined) {
+            if (!imageUrl?.startsWith("https://")) {
+                fixedImageUrl = "https://cedro.ce.gov.br/" + imageUrl;
+            } else {
+                fixedImageUrl = imageUrl;
+            }
+        }
+        return fixedImageUrl;
     }
 
     async getTotalPages(): Promise<number> {
