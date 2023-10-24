@@ -33,7 +33,7 @@ A API tem como objetivo extrair informações relevantes da página de notícias
     {
       "id": 1,
       "title": "Título da notícia",
-      "imagerUrl": "https://...",
+      "imageUrl": "https://...",
       "category": "#Categoria",
       "date": "26-OUT-2021",
       "elapsedTime": "Há 3 dias"
