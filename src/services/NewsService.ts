@@ -23,7 +23,7 @@ export class NewsService {
                 const newsItem: News = {
                     id: id,
                     title: title,
-                    imagerUrl: imageUrl,
+                    imageUrl: imageUrl,
                     category: category,
                     date: date,
                     elapsedTime: elapsedTime

@@ -1,7 +1,7 @@
 export interface News {
     id: number,
     title: string,
-    imagerUrl: string,
+    imageUrl: string,
     category: string,
     date: string,
     elapsedTime: string
