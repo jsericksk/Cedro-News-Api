@@ -39,6 +39,7 @@ A API tem como objetivo extrair informações relevantes da página de notícias
       "elapsedTime": "Há 3 dias"
     },
     [...]
+  ]
 }
 ```
 
